@@ -30,7 +30,7 @@ namespace parcial2naipe
         {
 
             services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("SergioContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("SergioContext")));   
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

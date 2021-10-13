@@ -22,17 +22,32 @@ namespace parcial2naipe.Controllers
         }
 
         // GET: api/Naipes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Naipe>>> GetNaipe()
-        {
-            return await _context.Naipe.ToListAsync();
-        }
+
 
         // GET: api/Naipes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Naipe>> GetNaipe(int id)
         {
             var naipe = await _context.Naipe.FindAsync(id);
+
+            if (naipe == null)
+            {
+                return NotFound();
+            }
+
+            return naipe;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<Naipe>> GetRandom()
+        {
+
+            var list = await _context.Naipe.ToListAsync();
+            var max = list.Count;
+
+            int index = new Random().Next(0, max);
+
+            var naipe = list[index];
 
             if (naipe == null)
             {
